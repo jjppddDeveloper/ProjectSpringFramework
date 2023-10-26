@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>サンプル</title>
+</head>
+<body>
+	<table border="1" th:unless="${#lists.isEmpty(list)}" style="table-layout: fixed;">
+		<tr>
+			<th>ID</th>
+			<th>名前</th>
+			<th>性別</th>
+			<th>年齢</th>
+			<th>編集</th>
+		</tr>
+		<tr th:each="obj : ${list}" align="center">
+			<td th:text="${obj.id}"></td>
+			<td th:text="${obj.name}"></td>
+			<td th:text="${obj.gender} == 0? '男性' : '女性'"></td>
+			<td th:text="${obj.age}"></td>
+			<!-- 編集ボタン -->
+			<td>
+				<form method="get" th:action="@{sample/{id}(id=${obj.id})}">
+					<input type="submit" value="編集">
+				</form>
+			</td>
+		</tr>
+	</table>
+</body>
